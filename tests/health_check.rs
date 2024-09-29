@@ -1,6 +1,7 @@
 //! tests/health_check.rs
 
 use std::net::TcpListener;
+use zero2prod::startup::run;
 
 // Launch our application in the background *somehow*
 // No await call therefore no need for spawn app to be async now.
@@ -13,7 +14,7 @@ fn spawn_app() -> String {
 
     // We retrieve the port assigned to us by the OS
     let port = listener.local_addr().unwrap().port();
-    let server = zero2prod::run(listener).expect("Failed to bind address");
+    let server = run(listener).expect("Failed to bind address");
 
     // Launch the server as a background task
     // tokio::spawn returns a handle to the spawned future,
